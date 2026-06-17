@@ -25,7 +25,9 @@ csharppublic class UserProfileModel
 }
 
 3. Graph Service Client Setup (Certificate Auth — Pattern)
-csharpusing Azure.Identity;
+csharp
+
+using Azure.Identity;
 using Microsoft.Graph;
 
 public static class GraphClientFactory
@@ -58,7 +60,9 @@ public static class GraphClientFactory
 }
 
 4. Bulk Fetch — All Users with Pagination
-csharpusing Microsoft.Graph;
+csharp
+
+using Microsoft.Graph;
 using Microsoft.Graph.Models;
 
 public class UserProfileService
@@ -120,7 +124,9 @@ public class UserProfileService
 }
 
 5. Fetch with Manager (Expand)
-csharppublic async Task<List<UserProfileModel>> GetAllUsersWithManagerAsync(
+csharp
+
+public async Task<List<UserProfileModel>> GetAllUsersWithManagerAsync(
     CancellationToken cancellationToken = default)
 {
     var profiles = new List<UserProfileModel>();
@@ -159,8 +165,10 @@ csharppublic async Task<List<UserProfileModel>> GetAllUsersWithManagerAsync(
     return profiles;
 }
 
-6. Batch API — Specific User IDs (Most Efficient)
-csharpusing Microsoft.Graph.Models;
+7. Batch API — Specific User IDs (Most Efficient)
+csharp
+
+using Microsoft.Graph.Models;
 using System.Text.Json;
 
 public async Task<List<UserProfileModel>> GetUserProfilesBatchAsync(
@@ -223,7 +231,9 @@ public async Task<List<UserProfileModel>> GetUserProfilesBatchAsync(
 
 7. SharePoint UPA Custom Properties (via SharePoint REST)
 For custom SharePoint profile fields not in Entra ID:
-csharpusing System.Net.Http.Headers;
+csharp
+
+using System.Net.Http.Headers;
 
 public class SharePointUpaService
 {
@@ -273,7 +283,9 @@ public class SharePointUpaService
 }
 
 8. Mapper
-csharpprivate static UserProfileModel MapToModel(User user) => new()
+csharp
+
+private static UserProfileModel MapToModel(User user) => new()
 {
     Id                 = user.Id,
     DisplayName        = user.DisplayName,
@@ -288,8 +300,10 @@ csharpprivate static UserProfileModel MapToModel(User user) => new()
     EmployeeId         = user.EmployeeId
 };
 
-9. Azure Function Entry Point (.NET Isolated)
-csharp[Function("BulkUserProfileExport")]
+10. Azure Function Entry Point (.NET Isolated)
+csharp
+
+[Function("BulkUserProfileExport")]
 public async Task Run([TimerTrigger("0 0 2 * * *")] TimerInfo timer)
 {
     _logger.LogInformation("BulkUserProfileExport triggered at {Time}", DateTime.UtcNow);
